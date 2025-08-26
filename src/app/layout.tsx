@@ -9,7 +9,7 @@ const Monserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "IEADEL Finance",
-  description: "Gerenciador de dízimos",
+  description: "Sistema financeiro",
 };
 
 export default function RootLayout({
