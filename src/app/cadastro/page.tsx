@@ -24,7 +24,7 @@ export default function Home() {
   }
 
     return (
-        <div className="flex flex-col items-center w-full mt-8">
+        <div className="flex flex-col items-center w-full mt-4">
             <main className="flex flex-col items-center gap-6">
                 <Image 
                 src="/logo.png"
