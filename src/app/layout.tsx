@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import {Montserrat } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 
+// Fonte sem variável
 const Monserrat = Montserrat({
-  variable: "--font-montserrat",
-  weight: ["200", "300", "400", "500", "600"]
+  weight: ["200", "300", "400", "500", "600"],
+  subsets: ["latin"], // opcional, mas recomendado
 });
 
 export const metadata: Metadata = {
@@ -19,9 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body
-        className={`${Monserrat.variable} antialiased`}
-      >
+      <body className={`${Monserrat.className} antialiased`}>
         {children}
       </body>
     </html>
