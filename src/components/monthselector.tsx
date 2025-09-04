@@ -48,7 +48,7 @@ export default function MonthSelector({
   };
 
   return (
-    <div className="flex items-center gap-6 justify-center space-x-4 py-4 mt-4">
+    <div className="flex items-center gap-6 justify-center py-4 mt-4">
       <button
         onClick={prevMonth}
         className="px-3 py-1 text-xl bg-gray-200 rounded hover:bg-gray-300"
