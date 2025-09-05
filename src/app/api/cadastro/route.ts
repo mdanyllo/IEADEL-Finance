@@ -4,7 +4,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const res = await fetch("http://localhost:8080/auth/novo", {
+    const res = await fetch("https://iadel-api-rest.onrender.com/auth/novo", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
