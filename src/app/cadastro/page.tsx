@@ -62,7 +62,7 @@ export default function Home() {
 
                 <form
                     onSubmit={handleSubmit}
-                    className="bg-white mt-8 shadow-sm rounded-lg p-6 w-96 flex flex-col gap-4"
+                    className="bg-white mt-4 shadow-sm rounded-lg p-6 w-96 flex flex-col gap-4"
                     >
                     <h1 className="font-semibold text-4xl text-center mb-6">Cadastro</h1>
                     <div>

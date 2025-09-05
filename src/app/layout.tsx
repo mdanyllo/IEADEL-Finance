@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import DisableInspect from "@/components/disableinspect";
 
-// Fonte sem variável
 const Monserrat = Montserrat({
   weight: ["200", "300", "400", "500", "600"],
-  subsets: ["latin"], // opcional, mas recomendado
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {

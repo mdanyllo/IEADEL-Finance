@@ -18,6 +18,7 @@ export default function NavBar() {
             </Image>
             </Link>
 
+            <Link href="/">
             <Image 
                 src="/perfil.png"
                 alt="Perfil"
@@ -25,6 +26,7 @@ export default function NavBar() {
                 height={40}
                 >
             </Image>
+            </Link>
             </div>
         </div>
     )

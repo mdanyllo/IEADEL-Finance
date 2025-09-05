@@ -38,7 +38,7 @@ export default function HomeAdmin() {
                     </section>
                 </div>
                 <div className="flex flex-row justify-center md:gap-30 gap-10 md:w-full w-90">
-                    <section className="flex gap-4 bg-[#fffb00] md:py-8 py-5 px-2 w-40 rounded-sm">
+                    <section className="flex gap-4 bg-[#f5dd02] md:py-8 py-5 px-2 w-40 rounded-sm">
                         <Link className="w-full flex justify-center items-center gap-4" href="/cadastro">
                             <h1 className="text-xl ml-1 text-white">Oferta</h1>
                             <Image
