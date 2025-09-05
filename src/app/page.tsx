@@ -8,7 +8,7 @@ export default function Home() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
-      async function handleSubmit(e: React.FormEvent) {
+    async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const res = await fetch("/api/login", {
