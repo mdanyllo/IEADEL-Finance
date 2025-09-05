@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const res = await fetch("http://localhost:8080/congregacoes");
+    const res = await fetch("https://iadel-api-rest.onrender.com/congregacoes");
 
     if (!res.ok) {
       return NextResponse.json(
