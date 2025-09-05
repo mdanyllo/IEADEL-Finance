@@ -14,6 +14,7 @@ export default function Home() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [nome, setNome] = useState("");
+    const [erro, setErro] = useState("");
     const router = useRouter();
 
     const [opcoes, setOpcoes] = useState<Congregacao[]>([]);
@@ -45,6 +46,10 @@ export default function Home() {
         console.log(data);
         if (res.ok) {
             router.push("/");
+        } else {
+            if(data?.error) {
+                setErro("Esse email já existe.")
+            }
         }
     }
 
@@ -86,6 +91,8 @@ export default function Home() {
                         required
                         />
                     </div>
+
+                    {erro && <span className="text-red-500 text-sm -mt-2 -mb-2">{erro}</span>}
 
                     <div>
                         <select

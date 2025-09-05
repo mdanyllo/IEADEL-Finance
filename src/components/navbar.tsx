@@ -18,7 +18,7 @@ export default function NavBar() {
             </Image>
             </Link>
 
-            <Link href="/">
+            <Link href="/perfiluser">
             <Image 
                 src="/perfil.png"
                 alt="Perfil"

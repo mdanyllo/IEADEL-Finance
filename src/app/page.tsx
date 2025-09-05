@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 export default function Home() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [erro, setErro] = useState("");
     const router = useRouter();
 
     async function handleSubmit(e: React.FormEvent) {
@@ -28,7 +29,7 @@ export default function Home() {
             router.push("/homeuser");
         }
     } else {
-      alert("Erro ao fazer login");
+      setErro("Usuário ou senha incorretos.");
     }
   }
 
@@ -70,6 +71,8 @@ export default function Home() {
                         required
                         />
                     </div>
+
+                    {erro && <span className="text-red-500 text-sm -mt-2 -mb-2">{erro}</span>}
 
                     <button
                         type="submit"
