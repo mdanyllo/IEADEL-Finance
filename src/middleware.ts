@@ -1,16 +1,15 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// Rotas que precisam de login
 const protectedRoutes = ["/homeadmin", "/homeuser"];
 
 export function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
-  const token = req.cookies.get("token")?.value; // cookie de auth
+  const token = req.cookies.get("token")?.value;
 
   if (protectedRoutes.some((path) => url.pathname.startsWith(path))) {
     if (!token) {
-      url.pathname = "/"; // redireciona para login
+      url.pathname = "/";
       return NextResponse.redirect(url);
     }
   }
@@ -19,5 +18,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/homeadmin/:path*", "/outra-rota/:path*"],
+  matcher: ["/homeadmin/:path*", "/homeuser/:path*"],
 };
