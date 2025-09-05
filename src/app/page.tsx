@@ -3,10 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const router = useRouter();
 
     async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -17,8 +19,17 @@ export default function Home() {
       body: JSON.stringify({ email, senha }),
     });
 
-    const data = await res.json();
-    console.log(data);
+    if (res.ok) {
+        const data = await res.json();
+        document.cookie = `token=${data.token}; path=/`;
+        if (data.perfil === "admin") {
+            router.push("/homeadmin");
+        } else if (data.perfil === "user") {
+            router.push("/homeuser");
+        }
+    } else {
+      alert("Erro ao fazer login");
+    }
   }
 
     return (
