@@ -2,26 +2,45 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [name, setName] = useState("");
-    const [selectedOption, setSelectedOption] = useState("");
+    const [senha, setSenha] = useState("");
+    const [nome, setNome] = useState("");
+    const router = useRouter();
 
-      async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+    const [opcoes, setOpcoes] = useState<any[]>([]);
+    const [idCongregacao, setIdCongregacao] = useState("");
 
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    useEffect(() => {
+        async function fetchCongregacoes() {
+            try {
+                const res = await fetch("/api/congregacao");
+                const data = await res.json();
+                setOpcoes(data);
+            } catch (err) {
+                console.error("Erro ao carregar congregações:", err);
+            }
+        }
 
-    const data = await res.json();
-    console.log(data);
-  }
+        fetchCongregacoes();
+    }, []);
+
+    async function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
+
+        const res = await fetch("/api/cadastro", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome, email, senha, idCongregacao }),
+        });
+        const data = await res.json();
+        if (res.ok) {
+            router.push("/");
+        }
+    }
 
     return (
         <div className="flex flex-col items-center w-full mt-4">
@@ -43,8 +62,8 @@ export default function Home() {
                     <div>
                         <input
                         type="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        value={nome}
+                        onChange={(e) => setNome(e.target.value)}
                         placeholder="Seu nome"
                         className="w-full capitalize p-2 border text-xl placeholder-[#383838] ring-[#6d6d6d] ring-1 rounded-md focus:ring-2 focus:ring-blue-500"
                         required
@@ -64,17 +83,17 @@ export default function Home() {
 
                     <div>
                         <select
-                            value={selectedOption}
-                            onChange={(e) => setSelectedOption(e.target.value)}
+                            value={idCongregacao}
+                            onChange={(e) => setIdCongregacao(e.target.value)}
                             className="w-full p-2 border text-xl text-[#383838] ring-[#6d6d6d] ring-1 rounded-md focus:ring-2 focus:ring-blue-500"
                             required
-                        >
-                            <option className="text-sm" value="" disabled>
-                            Sua congregação
-                            </option>
-                            <option className="text-sm" value="opcao1">Sede</option>
-                            <option className="text-sm" value="opcao2">Piçarreira</option>
-                            <option className="text-sm" value="opcao3">Vila do povo</option>
+                            >
+                            <option value="" disabled>Selecione</option>
+                            {opcoes.map((item) => (
+                                <option className="text-sm" key={item.idCongregacao} value={item.idCongregacao}>
+                                {item.nome} 
+                                </option>
+                            ))}
                         </select>
                     </div>
 
@@ -82,8 +101,8 @@ export default function Home() {
                     <div>
                         <input
                         type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
                         placeholder="Criar senha"
                         className="w-full p-2 border text-xl placeholder-[#383838] rounded-md ring-[#6d6d6d] ring-1 focus:ring-2 focus:ring-blue-500"
                         required
