@@ -37,6 +37,7 @@ export default function Home() {
         body: JSON.stringify({ nome, email, senha, idCongregacao }),
         });
         const data = await res.json();
+        console.log(data);
         if (res.ok) {
             router.push("/");
         }
