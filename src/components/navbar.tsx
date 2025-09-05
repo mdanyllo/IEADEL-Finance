@@ -12,8 +12,8 @@ export default function NavBar() {
             <Image 
                 src="/logo.png"
                 alt="Logo"
-                width={34}
-                height={34}
+                width={36}
+                height={36}
                 >
             </Image>
             </Link>
