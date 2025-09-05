@@ -5,13 +5,18 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+interface Congregacao {
+    idCongregacao: string;
+    nome: string;
+}
+
 export default function Home() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [nome, setNome] = useState("");
     const router = useRouter();
 
-    const [opcoes, setOpcoes] = useState<any[]>([]);
+    const [opcoes, setOpcoes] = useState<Congregacao[]>([]);
     const [idCongregacao, setIdCongregacao] = useState("");
 
     useEffect(() => {
