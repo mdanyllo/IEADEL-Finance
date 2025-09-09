@@ -3,19 +3,17 @@ import Link from "next/link";
 import Image from "next/image";
 import NavBar from "@/components/navbar";
 import MonthSelector from "@/components/monthselector";
-import { useEffect } from "react";
 
-import { useState } from "react";
 import { useEffect } from "react";
+import { useState } from "react";
 
 
 export default function HomeAdmin() {
-    const [saldo, setSaldo] = useState([]);
-    const [dizimo, setDizimo] = useState([]);
-    const [oferta, setOferta] = useState([]);
-    const [despesa, setDespesa] = useState([]);
+    const [saldo, setSaldo] = useState(0);
+    const [dizimo, setDizimo] = useState(0);
+    const [oferta, setOferta] = useState(0);
+    const [despesa, setDespesa] = useState(0);
     
-    // Saldo Geral
     useEffect(() => {
         async function fetchSaldoGeral() {
             try {
@@ -50,6 +48,17 @@ export default function HomeAdmin() {
     console.log("Dízimo Total:", dizimo);
     console.log("Oferta Total:", oferta);
     console.log("Despesa Total:", despesa);
+
+      function formatBRL(value: number | string | null) {
+    const num =
+      value == null
+        ? 0
+        : typeof value === "string"
+        ? parseFloat(value.replace(/\./g, "").replace(",", "."))
+        : Number(value);
+    if (Number.isNaN(num)) return "R$ 0,00";
+    return num.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  }
 
     return (
         <div>
@@ -92,11 +101,11 @@ export default function HomeAdmin() {
                             </Image>
                         </Link>
                     </section>
-                    <section className="flex gap-4 bg-[#00cf40] py-5 px-2 w-40 rounded-sm">
+                    <section className="flex bg-[#00cf40] py-5 px-2 w-40 rounded-sm">
                         <Link className="w-full flex justify-center items-center gap-4" href="/cadastro">
                             <div className="flex flex-col">
                             <h1 className="text-xl text-center text-white">Saldo</h1>
-                            <span className="text-[#007525] text-sm">R$ 10000,00</span>
+                            <span className="text-[#007525] text-sm">{formatBRL(saldo)}</span>
                             </div>
                             <Image
                                 alt="Símbolo financeiro" 
