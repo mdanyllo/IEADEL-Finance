@@ -5,6 +5,7 @@ import NavBar from "@/components/navbar";
 import MonthSelector from "@/components/monthselector";
 
 import { useState } from "react";
+import { useEffect } from "react";
 
 
 export default function HomeAdmin() {
@@ -37,7 +38,7 @@ export default function HomeAdmin() {
                         </Link>
                     </section>
                 </div>
-                <div className="flex flex-row justify-center md:gap-30 gap-10 md:w-full w-90">
+                <div className="flex flex-shrink-0 flex-row justify-center md:gap-30 gap-10 md:w-full min-w-90">
                     <section className="flex gap-4 bg-[#ff2200] md:py-8 py-5 px-2 w-40 rounded-sm">
                         <Link className="w-full flex justify-start items-center gap-2" href="/cadastro">
                             <h1 className="text-xl md:ml-1.5 text-white">Despesas</h1>
@@ -51,7 +52,10 @@ export default function HomeAdmin() {
                     </section>
                     <section className="flex gap-4 bg-[#00cf40] py-5 px-2 w-40 rounded-sm">
                         <Link className="w-full flex justify-center items-center gap-4" href="/cadastro">
-                            <h1 className="text-xl text-white">Saldo</h1>
+                            <div className="flex flex-col">
+                            <h1 className="text-xl text-center text-white">Saldo</h1>
+                            <span className="text-[#007525] text-sm">R$ 10000,00</span>
+                            </div>
                             <Image
                                 alt="Símbolo financeiro" 
                                 src="/saldo.png"
