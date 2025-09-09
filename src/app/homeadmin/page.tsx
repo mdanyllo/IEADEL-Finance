@@ -3,11 +3,53 @@ import Link from "next/link";
 import Image from "next/image";
 import NavBar from "@/components/navbar";
 import MonthSelector from "@/components/monthselector";
+import { useEffect } from "react";
 
 import { useState } from "react";
 
 
 export default function HomeAdmin() {
+    const [saldo, setSaldo] = useState([]);
+    const [dizimo, setDizimo] = useState([]);
+    const [oferta, setOferta] = useState([]);
+    const [despesa, setDespesa] = useState([]);
+    
+    // Saldo Geral
+    useEffect(() => {
+        async function fetchSaldoGeral() {
+            try {
+                const res = await fetch("/api/movimentacoes/saldoTotal");
+                const data = await res.json();
+                setSaldo(data.total);
+            } catch (err) {
+                console.error("Erro ao carregar saldo:", err);
+            }
+        }
+
+        fetchSaldoGeral();
+    }, []);
+
+    useEffect(() => {
+        async function fetchTotais() {
+            try {
+                const res = await fetch("/api/movimentacoes/totais");
+                const data = await res.json();
+                setDizimo(data.dizimo);
+                setOferta(data.oferta);
+                setDespesa(data.despesa);
+
+            } catch (err) {
+                console.error("Erro ao carregar dízimo:", err);
+            }
+        }
+        fetchTotais();
+    }, []);
+
+    console.log("Saldo Total:", saldo);
+    console.log("Dízimo Total:", dizimo);
+    console.log("Oferta Total:", oferta);
+    console.log("Despesa Total:", despesa);
+
     return (
         <div>
             <NavBar />
