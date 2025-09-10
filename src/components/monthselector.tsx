@@ -71,7 +71,7 @@ export default function MonthSelector({
       >
         &lt;
       </button>
-      <span className="text-lg font-semibold text-black">
+      <span className="text-lg md:text-xl font-semibold text-black">
         {meses[mes - 1]} {ano}
       </span>
       <button
