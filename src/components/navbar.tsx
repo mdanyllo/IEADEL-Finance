@@ -16,20 +16,19 @@ export default function NavBar() {
             <Image 
                 src="/logo.png"
                 alt="Logo"
-                width={36}
-                height={36}
+                width={35}
+                height={35}
                 >
             </Image>
             </Link>
-
-            <button onClick={handleLogout}>
+            <button title="Sair" className="cursor-pointer" onClick={handleLogout}>
             <Image
-                src="/perfil.png"
-                alt="Perfil"
+                src="/logout.png"
+                alt="Sair"
                 width={40}
                 height={40}
             />
-            </button>
+            </button>   
             </div>
         </div>
     )

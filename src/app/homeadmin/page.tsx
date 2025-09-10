@@ -1,6 +1,7 @@
 "use client"; 
 import Link from "next/link";
 import Image from "next/image";
+import Head from "next/head";
 import NavBar from "@/components/navbar";
 import MonthSelector from "@/components/monthselector";
 
@@ -57,7 +58,11 @@ export default function HomeAdmin() {
   }
 
     return (
+        
         <div>
+            <head>
+                <title>Home</title>
+            </head>
             <NavBar />
             <MonthSelector
                 initialMonth={mes}

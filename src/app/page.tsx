@@ -1,6 +1,7 @@
 "use client"; 
 import Link from "next/link";
 import Image from "next/image";
+import Head from "next/head"
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -35,6 +36,9 @@ export default function Home() {
 
     return (
         <div className="flex flex-col items-center w-full mt-8">
+            <head>
+                <title>Login IEADEL Finance</title>
+            </head>
             <main className="flex flex-col items-center gap-6">
                 <Image 
                 src="/logo.png"
