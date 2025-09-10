@@ -19,32 +19,48 @@ const meses = [
 interface MonthSelectorProps {
   initialMonth?: number;
   initialYear?: number;
+  onChange?: (mes: number, ano: number) => void;
 }
 
 export default function MonthSelector({
   initialMonth,
   initialYear,
+  onChange,
 }: MonthSelectorProps) {
   const today = new Date();
   const [mes, setMes] = useState(initialMonth || today.getMonth() + 1);
   const [ano, setAno] = useState(initialYear || today.getFullYear());
 
   const prevMonth = () => {
+    let newMes = mes;
+    let newAno = ano;
+
     if (mes === 1) {
-      setMes(12);
-      setAno(ano - 1);
+      newMes = 12;
+      newAno = ano - 1;
     } else {
-      setMes(mes - 1);
+      newMes = mes - 1;
     }
+
+    setMes(newMes);
+    setAno(newAno);
+    onChange?.(newMes, newAno);
   };
 
   const nextMonth = () => {
+    let newMes = mes;
+    let newAno = ano;
+
     if (mes === 12) {
-      setMes(1);
-      setAno(ano + 1);
+      newMes = 1;
+      newAno = ano + 1;
     } else {
-      setMes(mes + 1);
+      newMes = mes + 1;
     }
+
+    setMes(newMes);
+    setAno(newAno);
+    onChange?.(newMes, newAno);
   };
 
   return (

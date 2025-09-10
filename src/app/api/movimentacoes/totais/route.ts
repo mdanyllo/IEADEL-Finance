@@ -1,12 +1,24 @@
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const mes = searchParams.get("mes")
+  const ano = searchParams.get("ano");
+
+  if (!mes || !ano) {
+    return NextResponse.json(
+      { error: "Parâmetros 'mes' e 'ano' são obrigatórios" },
+      { status: 400 }
+    );
+  }
+
   try {
-    const res = await fetch("https://iadel-api-rest.onrender.com/movimentacoes/totais?mes=09&ano=2025");
+    const mesFormatado = String(mes).padStart(2, "0");
+    const res = await fetch(`https://iadel-api-rest.onrender.com/movimentacoes/totais?mes=${mesFormatado}&ano=${ano}`);
 
     if (!res.ok) {
       return NextResponse.json(
-        { error: "Falha na autenticação", status: res.status },
+        { error: "Falha ao buscar dados", status: res.status },
         { status: res.status }
       );
     }

@@ -9,6 +9,8 @@ import { useState } from "react";
 
 
 export default function HomeAdmin() {
+    const [mes, setMes] = useState(new Date().getMonth() + 1);
+    const [ano, setAno] = useState(new Date().getFullYear());
     const [saldo, setSaldo] = useState(0);
     const [dizimo, setDizimo] = useState(0);
     const [oferta, setOferta] = useState(0);
@@ -30,24 +32,18 @@ export default function HomeAdmin() {
 
     useEffect(() => {
         async function fetchTotais() {
-            try {
-                const res = await fetch("/api/movimentacoes/totais");
-                const data = await res.json();
-                setDizimo(data.dizimo);
-                setOferta(data.oferta);
-                setDespesa(data.despesa);
-
-            } catch (err) {
-                console.error("Erro ao carregar dízimo:", err);
-            }
+        try {
+            const res = await fetch(`/api/movimentacoes/totais?mes=${mes}&ano=${ano}`);
+            const data = await res.json();
+            setDizimo(data.dizimo);
+            setOferta(data.oferta);
+            setDespesa(data.despesa);
+        } catch (err) {
+            console.error("Erro ao carregar totais:", err);
+        }
         }
         fetchTotais();
-    }, []);
-
-    console.log("Saldo Total:", saldo);
-    console.log("Dízimo Total:", dizimo);
-    console.log("Oferta Total:", oferta);
-    console.log("Despesa Total:", despesa);
+    }, [mes, ano]);
 
       function formatBRL(value: number | string | null) {
     const num =
@@ -63,7 +59,14 @@ export default function HomeAdmin() {
     return (
         <div>
             <NavBar />
-            <MonthSelector />
+            <MonthSelector
+                initialMonth={mes}
+                initialYear={ano}
+                onChange={(novoMes, novoAno) => {
+                setMes(novoMes);
+                setAno(novoAno);
+                }}
+            />
             <div className="flex flex-col items-center w-full mt-10 md:gap-20 gap-8">
                 <div className="flex flex-row justify-center md:gap-30 gap-10 md:w-full w-90">
                     <section className="flex gap-4 bg-[#008eff] md:py-8 py-5 px-2 w-40 rounded-sm">
