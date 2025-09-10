@@ -68,7 +68,10 @@ export default function HomeAdmin() {
                 <div className="flex flex-row justify-center md:gap-30 gap-10 md:w-full w-90">
                     <section className="flex gap-4 bg-[#008eff] md:py-8 py-5 px-2 w-40 rounded-sm">
                         <Link className="w-full flex justify-start items-center gap-4" href="/cadastro">
-                            <h1 className="text-xl ml-2 text-white">Dizímo</h1>
+                            <div className="flex flex-col">
+                            <h1 className="text-xl text-center text-white">Dízimo</h1>
+                            <span className="text-[#004781] text-sm">{formatBRL(dizimo)}</span>
+                            </div>
                             <Image
                                 alt="Símbolo financeiro" 
                                 src="/dizimo.png"
@@ -79,7 +82,10 @@ export default function HomeAdmin() {
                     </section>
                     <section className="flex gap-4 bg-[#f5dd02] md:py-8 py-5 px-2 w-40 rounded-sm">
                         <Link className="w-full flex justify-center items-center gap-4" href="/cadastro">
-                            <h1 className="text-xl ml-1 text-white">Oferta</h1>
+                            <div className="flex flex-col">
+                            <h1 className="text-xl text-center text-white">Oferta</h1>
+                            <span className="text-[#9c8d00] text-sm">{formatBRL(oferta)}</span>
+                            </div>
                             <Image
                                 alt="Símbolo financeiro" 
                                 src="/oferta.png"
@@ -92,7 +98,10 @@ export default function HomeAdmin() {
                 <div className="flex flex-shrink-0 flex-row justify-center md:gap-30 gap-10 md:w-full min-w-90">
                     <section className="flex gap-4 bg-[#ff2200] md:py-8 py-5 px-2 w-40 rounded-sm">
                         <Link className="w-full flex justify-start items-center gap-2" href="/cadastro">
-                            <h1 className="text-xl md:ml-1.5 text-white">Despesas</h1>
+                            <div className="flex flex-col">
+                            <h1 className="text-xl text-center text-white">Despesas</h1>
+                            <span className="text-[#961400] text-sm">{formatBRL(despesa)}</span>
+                            </div>
                             <Image
                                 alt="Símbolo financeiro" 
                                 src="/despesa.png"
