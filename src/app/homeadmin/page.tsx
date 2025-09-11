@@ -12,15 +12,17 @@ import { useState } from "react";
 export default function HomeAdmin() {
     const [mes, setMes] = useState(new Date().getMonth() + 1);
     const [ano, setAno] = useState(new Date().getFullYear());
+    const user = localStorage.getItem("user");
+    const idCongregacao = user ? JSON.parse(user).congregacao.idCongregacao : null;
     const [saldo, setSaldo] = useState(0);
     const [dizimo, setDizimo] = useState(0);
     const [oferta, setOferta] = useState(0);
     const [despesa, setDespesa] = useState(0);
-    
+    console.log(idCongregacao);
     useEffect(() => {
         async function fetchSaldoGeral() {
             try {
-                const res = await fetch("/api/movimentacoes/saldoTotal");
+                const res = await fetch(`/api/movimentacoes/saldoTotal?idCongregacao=${idCongregacao}`);
                 const data = await res.json();
                 setSaldo(data.total);
             } catch (err) {
@@ -34,7 +36,7 @@ export default function HomeAdmin() {
     useEffect(() => {
         async function fetchTotais() {
         try {
-            const res = await fetch(`/api/movimentacoes/totais?mes=${mes}&ano=${ano}`);
+            const res = await fetch(`/api/movimentacoes/totais?mes=${mes}&ano=${ano}&idCongregacao=${idCongregacao}`);
             const data = await res.json();
             setDizimo(data.dizimo);
             setOferta(data.oferta);

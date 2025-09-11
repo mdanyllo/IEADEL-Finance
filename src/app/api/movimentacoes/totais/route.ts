@@ -4,6 +4,7 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const mes = searchParams.get("mes")
   const ano = searchParams.get("ano");
+  const idCongregacao = searchParams.get("idCongregacao");
 
   if (!mes || !ano) {
     return NextResponse.json(
@@ -14,7 +15,7 @@ export async function GET(req: Request) {
 
   try {
     const mesFormatado = String(mes).padStart(2, "0");
-    const res = await fetch(`https://iadel-api-rest.onrender.com/movimentacoes/totais?mes=${mesFormatado}&ano=${ano}`);
+    const res = await fetch(`https://iadel-api-rest.onrender.com/movimentacoes/totais?mes=${mesFormatado}&ano=${ano}&idCongregacao=${idCongregacao}`);
 
     if (!res.ok) {
       return NextResponse.json(
