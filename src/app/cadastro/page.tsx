@@ -26,7 +26,8 @@ export default function Home() {
             try {
                 const res = await fetch("/api/congregacao");
                 const data = await res.json();
-                setOpcoes(data);
+                const congregacoesOrdenadas = data.sort((a: Congregacao, b: Congregacao) => Number(a.idCongregacao) - Number(b.idCongregacao));
+                setOpcoes(congregacoesOrdenadas);
             } catch (err) {
                 console.error("Erro ao carregar congregações:", err);
             }
