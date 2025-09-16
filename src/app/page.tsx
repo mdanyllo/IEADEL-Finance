@@ -1,12 +1,16 @@
 "use client"; 
 import Link from "next/link";
 import Image from "next/image";
+import Head from "next/head"
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [erro, setErro] = useState("");
+    const router = useRouter();
 
     async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -17,12 +21,25 @@ export default function Home() {
       body: JSON.stringify({ email, senha }),
     });
 
-    const data = await res.json();
-    console.log(data);
+    if (res.ok) {
+        const data = await res.json();
+        document.cookie = `token=${data.token}; path=/`;
+        localStorage.setItem("user", JSON.stringify(data));
+        if (data.perfil === "ADMIN") {
+            router.push("/homeadmin");
+        } else if (data.perfil === "USER") {
+            router.push("/homeuser");
+        }
+    } else {
+      setErro("Usuário ou senha incorretos.");
+    }
   }
 
     return (
         <div className="flex flex-col items-center w-full mt-8">
+            <head>
+                <title>Login IEADEL Finance</title>
+            </head>
             <main className="flex flex-col items-center gap-6">
                 <Image 
                 src="/logo.png"
@@ -59,6 +76,8 @@ export default function Home() {
                         required
                         />
                     </div>
+
+                    {erro && <span className="text-red-500 text-sm -mt-2 -mb-2">{erro}</span>}
 
                     <button
                         type="submit"
