@@ -25,9 +25,9 @@ export default function Home() {
         const data = await res.json();
         document.cookie = `token=${data.token}; path=/`;
         localStorage.setItem("user", JSON.stringify(data));
-        if (data.perfil === "admin") {
+        if (data.perfil === "ADMIN") {
             router.push("/homeadmin");
-        } else if (data.perfil === "user") {
+        } else if (data.perfil === "USER") {
             router.push("/homeuser");
         }
     } else {
