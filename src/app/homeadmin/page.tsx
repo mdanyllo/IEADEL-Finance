@@ -8,6 +8,7 @@ import MonthSelector from "@/components/monthselector";
 import { useEffect } from "react";
 import { useState } from "react";
 
+export const dynamic = "force-dynamic";
 
 export default function HomeAdmin() {
     const [mes, setMes] = useState(new Date().getMonth() + 1);

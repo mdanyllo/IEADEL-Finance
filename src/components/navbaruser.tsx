@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { useState } from "react";
 
-export default function NavBar() {
+export default function NavBarUser() {
     async function handleLogout() {
         await fetch("/api/logout", { method: "POST" });
         window.location.href = "/";
@@ -12,7 +12,7 @@ export default function NavBar() {
     return (
         <div className="flex w-full py-1 shadow-md">
             <div className="flex flex-row justify-between items-center m-4 w-full">
-            <Link href="/homeadmin">
+            <Link className="disable" href="">
             <Image 
                 src="/logo.png"
                 alt="Logo"

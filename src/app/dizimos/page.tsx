@@ -2,6 +2,7 @@ import Head from "next/head";
 import NavBar from "@/components/navbar"
 import MonthSelector from "@/components/monthselector"
 import FormDizimo from "@/components/formdizimo";
+import MovimentacoesDizimo from "@/components/movimentacoesdizimo";
 
 
 export default function Dizimos() {
@@ -12,6 +13,7 @@ export default function Dizimos() {
             </head>
             <NavBar />
             <MonthSelector />
+            <MovimentacoesDizimo />
             <FormDizimo />
         </div>
     )
