@@ -1,10 +1,10 @@
 "use client"; 
 import Link from "next/link";
 import Image from "next/image";
-import Head from "next/head"
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
     const [email, setEmail] = useState("");
@@ -16,9 +16,9 @@ export default function Home() {
     e.preventDefault();
 
     const res = await fetch("/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, senha }),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, senha }),
     });
 
     if (res.ok) {
@@ -35,12 +35,29 @@ export default function Home() {
     }
   }
 
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const botao = document.querySelector<HTMLButtonElement>(
+          "button[type='submit'], button.salvar"
+        );
+        if (botao) botao.click();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
     return (
         <div className="flex flex-col items-center w-full mt-8">
             <head>
                 <title>Login IEADEL Finance</title>
             </head>
-            <main className="flex flex-col items-center gap-6">
+            <main className="flex flex-col items-center gap-4">
                 <Image 
                 src="/logo.png"
                 alt="Logo"
@@ -52,7 +69,7 @@ export default function Home() {
 
                 <form
                     onSubmit={handleSubmit}
-                    className="bg-white mt-8 shadow-sm rounded-lg p-6 w-96 flex flex-col gap-4"
+                    className="bg-white mt-5 shadow-sm rounded-lg p-6 w-96 flex flex-col gap-4"
                     >
                     <h1 className="font-semibold text-4xl text-center mb-6">Login</h1>
                     <div>

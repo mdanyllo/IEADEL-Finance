@@ -55,6 +55,23 @@ export default function Home() {
         }
     }
 
+    useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const botao = document.querySelector<HTMLButtonElement>(
+          "button[type='submit'], button.salvar"
+        );
+        if (botao) botao.click();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
     return (
         <div className="flex flex-col items-center w-full mt-4">
             <head>
