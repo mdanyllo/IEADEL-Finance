@@ -1,20 +1,25 @@
-import Head from "next/head";
 import NavBar from "@/components/navbar"
 import MonthSelector from "@/components/monthselector"
 import FormDizimo from "@/components/formdizimo";
-import MovimentacoesDizimo from "@/components/movimentacoesdizimo";
+import Movimentacoes from "@/components/movimentacoesdizimos";
+import Head from "next/head";
 
+export const metadata = {
+  title: "Dízimos",
+};
 
 export default function Dizimos() {
     return (
-        <div>
-            <head>
+        <>
+            <Head>
                 <title>Dízimos</title>
-            </head>
-            <NavBar />
-            <MonthSelector />
-            <MovimentacoesDizimo />
-            <FormDizimo />
-        </div>
+            </Head>
+            <div>
+                <NavBar />
+                <MonthSelector />
+                <Movimentacoes />
+                <FormDizimo />
+            </div>
+        </>
     )
 }
