@@ -6,7 +6,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export default function HomeUser() {
-	const [dizimos, setDizimos] = useState([]);
+  interface Dizimo {
+  id: string | number;
+  data: string | Date;
+  valor: number;
+  }
+
+	const [dizimos, setDizimos] = useState<Dizimo[]>([]);
 	const meses = [
 		"Janeiro",
 		"Fevereiro",
@@ -68,7 +74,7 @@ export default function HomeUser() {
 							</thead>
 							<tbody>
 								{dizimos.length > 0 ? (
-									dizimos.map((d: any) => (
+									dizimos.map((d) => (
 										<tr key={d.id} className="bg-white hover:bg-gray-100">
 											<td className="px-4 py-2 border w-1/3">{meses[new Date(d.data).getMonth()]}</td>
 											<td className="px-4 py-2 border w-1/3">{new Date(d.data).toLocaleDateString("pt-BR")}</td>
