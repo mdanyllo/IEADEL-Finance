@@ -11,7 +11,7 @@ export default function Home() {
     const [senha, setSenha] = useState("");
     const [erro, setErro] = useState("");
     const router = useRouter();
-
+  
     async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
@@ -98,9 +98,9 @@ export default function Home() {
 
                     <button
                         type="submit"
-                        className="bg-blue-600 text-white text-xl cursor-pointer py-2 rounded-md hover:bg-blue-700 transition"
+                        className="bg-blue-600 mt-2 text-white text-xl cursor-pointer py-2 rounded-md hover:bg-blue-700 transition"
                     >
-                        Entrar
+                        Entrar  
                     </button>
                     <p className="text-center">Não possui uma conta? <Link className="underline" href="/cadastro">Criar</Link></p>
                 </form>

@@ -1,6 +1,4 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
 import Head from "next/head";
 import NavBarUser from "@/components/navbaruser";
 import MonthSelector from "@/components/monthselector";
