@@ -11,7 +11,7 @@ export default function HomeUser() {
   data: string | Date;
   valor: number;
   }
-
+    const [ano, setAno] = useState(new Date().getFullYear());
 	const [dizimos, setDizimos] = useState<Dizimo[]>([]);
 	const meses = [
 		"Janeiro",
@@ -45,12 +45,18 @@ export default function HomeUser() {
 				const res = await fetch(`/api/movimentacoes/dizimos/porUsuario?id_usuario=${id_usuario}`);
 				const data = await res.json();
 				setDizimos(data);
+				
 			} catch (err) {
 				console.error("Erro ao carregar saldo:", err);
 			}
 		}
 		fetchDizimosPorUsuario()
-	}, []);
+	}, [ano]);
+
+	const dizimosFiltrados = dizimos.filter(
+		(d) => new Date(d.data).getFullYear() === ano
+	);
+
 	return (
 		<>
 			<Head>
@@ -58,11 +64,15 @@ export default function HomeUser() {
 			</Head>
 			<div>
 				<NavBarUser />
-				<YearSelector />
+				<YearSelector
+                    initialYear={ano}
+                    onChange={(novoAno) => {
+                    setAno(novoAno);
+                    }}
+				/>
 
 				<div className="flex flex-col items-center justify-center mb-10 mt-10">
 					<h2 className="text-center md:text-2xl text-xl font-bold mb-6">Seus dízimos</h2>
-
 					<div className="shadow-lg rounded-lg overflow-x-auto md:w-3/4 m-2">
 						<table className="w-full table-fixed border-collapse text-center">
 							<thead className="bg-black text-white">
@@ -73,8 +83,8 @@ export default function HomeUser() {
 								</tr>
 							</thead>
 							<tbody>
-								{dizimos.length > 0 ? (
-									dizimos.map((d) => (
+								{dizimosFiltrados.length > 0 ? (
+									dizimosFiltrados.map((d) => (
 										<tr key={d.id} className="bg-white hover:bg-gray-100">
 											<td className="px-4 py-2 border w-1/3">{meses[new Date(d.data).getMonth()]}</td>
 											<td className="px-4 py-2 border w-1/3">{new Date(d.data).toLocaleDateString("pt-BR")}</td>
@@ -91,7 +101,6 @@ export default function HomeUser() {
 									</tr>
 								)}
 							</tbody>
-
 						</table>
 					</div>
 				</div>

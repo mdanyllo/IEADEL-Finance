@@ -1,81 +1,42 @@
 "use client";
 import { useState } from "react";
 
-const meses = [
-  "Janeiro",
-  "Fevereiro",
-  "Março",
-  "Abril",
-  "Maio",
-  "Junho",
-  "Julho",
-  "Agosto",
-  "Setembro",
-  "Outubro",
-  "Novembro",
-  "Dezembro",
-];
-
-interface MonthSelectorProps {
-  initialMonth?: number;
+interface YearSelectorProps {
   initialYear?: number;
-  onChange?: (mes: number, ano: number) => void;
+  onChange?: (ano: number) => void;
 }
 
-export default function YearSelector({
-  initialMonth,
-  initialYear,
-  onChange,
-}: MonthSelectorProps) {
-  const today = new Date();
-  const [mes, setMes] = useState(initialMonth || today.getMonth() + 1);
-  const [ano, setAno] = useState(initialYear || today.getFullYear());
+export default function YearSelector({ initialYear, onChange }: YearSelectorProps) {
+  const currentYear = new Date().getFullYear();
+  const [ano, setAno] = useState(initialYear || currentYear);
 
-  const prevMonth = () => {
-    let newMes = mes;
-    let newAno = ano;
-
-    if (mes === 1) {
-      newMes = 12;
-      newAno = ano - 1;
-    } else {
-      newMes = mes - 1;
-    }
-
-    setMes(newMes);
+  const prevYear = () => {
+    const newAno = ano - 1;
     setAno(newAno);
-    onChange?.(newMes, newAno);
+    onChange?.(newAno);
   };
 
-  const nextMonth = () => {
-    let newMes = mes;
-    let newAno = ano;
-
-    if (mes === 12) {
-      newMes = 1;
-      newAno = ano + 1;
-    } else {
-      newMes = mes + 1;
-    }
-
-    setMes(newMes);
+  const nextYear = () => {
+    const newAno = ano + 1;
     setAno(newAno);
-    onChange?.(newMes, newAno);
+    onChange?.(newAno);
   };
 
   return (
     <div className="flex items-center gap-6 justify-center py-4 mt-4">
       <button
-        onClick={prevMonth}
+        onClick={prevYear}
         className="px-3 py-1 text-xl bg-gray-200 rounded hover:bg-gray-300"
       >
         &lt;
       </button>
+
       <span className="text-lg md:text-xl font-semibold text-black">
-        {meses[mes - 1]} {ano}
+        {ano}
       </span>
+
       <button
-        onClick={nextMonth}
+        onClick={nextYear}
         className="px-3 py-1 text-xl bg-gray-200 rounded hover:bg-gray-300"
       >
         &gt;
