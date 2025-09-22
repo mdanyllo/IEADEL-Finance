@@ -97,15 +97,16 @@ export default function Home() {
 
                       {erro && <span className="text-red-500 text-sm -mt-2 -mb-2">{erro}</span>}
 
-                    <button
-                        type="submit"
-                        className="bg-blue-600 text-white text-xl cursor-pointer py-2 rounded-md hover:bg-blue-700 transition"
-                    >
-                        Entrar
-                    </button>
-                    <p className="text-center">Não possui uma conta? <Link className="underline" href="/cadastro">Criar</Link></p>
-                </form>
-            </main>
-        </div>
+                      <button
+                          type="submit"
+                          className="bg-blue-600 text-white text-xl cursor-pointer py-2 rounded-md hover:bg-blue-700 transition"
+                      >
+                          Entrar
+                      </button>
+                      <p className="text-center">Não possui uma conta? <Link className="underline" href="/cadastro">Criar</Link></p>
+                  </form>
+              </main>
+          </div>
+        </>
     )
 }
