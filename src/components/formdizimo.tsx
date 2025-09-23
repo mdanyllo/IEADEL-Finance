@@ -1,47 +1,57 @@
 "use client";
 import { useState } from "react";
 
-type Pessoa = { id: number; nome: string };
+type Pessoa = { id_usuario: number; nome: string };
 
 export default function DizimoModal() {
   const [isOpen, setIsOpen] = useState(false); 
-  const [nome, setNome] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [id_usuario, setIdUsuario] = useState<number | null>(null);
   const [valor, setValor] = useState("");
   const [data, setData] = useState("");
   const [sugestoes, setSugestoes] = useState<Pessoa[]>([]);
 
   async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const valorInput = e.target.value;
-    setNome(valorInput);
+    setDescricao(valorInput);
 
     if (valorInput.length > 1) {
       const res = await fetch(`/api/usuario?query=${valorInput}`);
       const data: Pessoa[] = await res.json();
       setSugestoes(data);
+      console.log(data);
     } else {
       setSugestoes([]);
     }
   }
+  
 
   function handleSelect(pessoa: Pessoa) {
-    setNome(pessoa.nome);
+    setDescricao(pessoa.nome);
+    setIdUsuario(pessoa.id_usuario);
     setSugestoes([]);
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
     const payload = {
-      nome,
+      descricao,
       valor: Number(valor) || 0,
       data,
+      usuarioId: id_usuario,
+      idCongregacao: JSON.parse(localStorage.getItem("user") || "{}").congregacao.idCongregacao,
+      tipo: "DIZIMO",
     };
 
     console.log("Dízimo enviado:", payload);
 
-    // salvar no banco via fetch para API
+    const res = await fetch("/api/movimentacoes/novo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+    });
 
-    setNome("");
+    setDescricao("");
     setValor("");
     setData("");
     setSugestoes([]);
@@ -66,7 +76,7 @@ export default function DizimoModal() {
               <div className="relative">
                 <input
                   type="text"
-                  value={nome}
+                  value={descricao}
                   onChange={handleChange}
                   placeholder="Nome da pessoa"
                   className="border p-2 w-full"
@@ -75,7 +85,7 @@ export default function DizimoModal() {
                   <ul className="absolute z-10 bg-white border w-full max-h-40 overflow-y-auto">
                     {sugestoes.map((p) => (
                       <li
-                        key={p.id}
+                        key={p.id_usuario}
                         onClick={() => handleSelect(p)}
                         className="p-2 hover:bg-gray-200 cursor-pointer"
                       >
