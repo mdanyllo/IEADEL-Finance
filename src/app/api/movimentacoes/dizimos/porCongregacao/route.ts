@@ -1,26 +1,27 @@
+// src/app/api/movimentacoes/dizimos/porCongregacao/route.ts
 import { NextResponse } from "next/server";
 
-export async function GET( request: Request ) {
-    const { searchParams } = new URL(request.url);
-    const id_usuario = searchParams.get("id_usuario");
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+
+  const tipo = searchParams.get("tipo");
+  const mes = searchParams.get("mes");
+  const ano = searchParams.get("ano");
+  const idCongregacao = searchParams.get("idCongregacao");
+
+  // Monta a URL para o backend
+  const apiUrl = `https://iadel-api-rest.onrender.com/movimentacoes?tipo=${tipo}&mes=${mes}&ano=${ano}&idCongregacao=${idCongregacao}`;
+
   try {
-    const res = await fetch(`https://iadel-api-rest.onrender.com/movimentacoes/dizimoByUsuario?id_usuario=${id_usuario}`);
+    const res = await fetch(apiUrl, { cache: "no-store" });
 
     if (!res.ok) {
-      return NextResponse.json(
-        { error: "Falha na autenticação", status: res.status },
-        { status: res.status }
-      );
+      return NextResponse.json({ error: "Erro no backend" }, { status: res.status });
     }
 
     const data = await res.json();
-    return NextResponse.json(data, { status: res.status });
-
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("Erro no proxy:", error);
-    return NextResponse.json(
-      { error: "Erro ao conectar com API" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Falha ao buscar dados" }, { status: 500 });
   }
 }
