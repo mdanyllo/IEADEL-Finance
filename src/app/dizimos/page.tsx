@@ -1,6 +1,5 @@
 "use client";
 import NavBar from "@/components/navbar"
-import MonthSelector from "@/components/monthselector"
 import FormDizimo from "@/components/formdizimo";
 import Movimentacoes from "@/components/movimentacoesdizimos";
 import type { Dizimo } from "@/components/movimentacoesdizimos";
@@ -30,7 +29,6 @@ export default function Dizimos() {
                 const mesFormatado = String(mes).padStart(2, "0");
                 const res = await fetch(`/api/movimentacoes/dizimos/porCongregacao?tipo=DIZIMO&mes=${mesFormatado}&ano=${ano}&idCongregacao=${idCongregacao}`);
                 const data = await res.json();
-                console.log(data)
                 setDizimo(data);
             } catch (err) {
                 console.error("Erro ao carregar dízimos:", err);
@@ -45,7 +43,6 @@ export default function Dizimos() {
             </Head>
             <div>
                 <NavBar />
-                <MonthSelector />
                 <Movimentacoes
                     initialMonth={mes}
                     initialYear={ano}
