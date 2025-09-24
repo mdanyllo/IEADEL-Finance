@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
+import { url } from "@/components/variavel";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const idCongregacao = searchParams.get("idCongregacao");
   try {
-    const res = await fetch(`https://iadel-api-rest.onrender.com/movimentacoes/totalGeral?idCongregacao=${idCongregacao}`);
+    const res = await fetch(`${url}/movimentacoes/totalGeral?idCongregacao=${idCongregacao}`);
 
     if (!res.ok) {
       return NextResponse.json(

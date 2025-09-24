@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
+import { url } from "@/components/variavel";
 
 export async function GET() {
   try {
-    const res = await fetch("https://iadel-api-rest.onrender.com/congregacoes");
+    const res = await fetch(`${url}/congregacoes`);
 
     if (!res.ok) {
       return NextResponse.json(

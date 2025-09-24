@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { url } from "@/components/variavel";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -15,7 +16,7 @@ export async function GET(req: Request) {
 
   try {
     const mesFormatado = String(mes).padStart(2, "0");
-    const res = await fetch(`https://iadel-api-rest.onrender.com/movimentacoes/totais?mes=${mesFormatado}&ano=${ano}&idCongregacao=${idCongregacao}`);
+    const res = await fetch(`${url}/movimentacoes/totais?mes=${mesFormatado}&ano=${ano}&idCongregacao=${idCongregacao}`);
 
     if (!res.ok) {
       return NextResponse.json(

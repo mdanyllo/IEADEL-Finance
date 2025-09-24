@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
+import { url } from "@/components/variavel";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const res = await fetch("https://iadel-api-rest.onrender.com/auth/novo", {
+    const res = await fetch(`${url}/auth/novo`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
