@@ -5,6 +5,7 @@ import Head from "next/head";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
 interface Congregacao {
     idCongregacao: string;
     nome: string;
@@ -131,7 +132,6 @@ export default function Home() {
                                 ))}
                             </select>
                         </div>
-
 
                         <div>
                             <input
