@@ -1,6 +1,5 @@
 "use client";
 import NavBar from "@/components/navbar"
-import MonthSelector from "@/components/monthselector"
 import FormDizimo from "@/components/formdizimo";
 import Movimentacoes from "@/components/movimentacoesdizimos";
 import type { Dizimo } from "@/components/movimentacoesdizimos";
@@ -45,7 +44,6 @@ export default function Dizimos() {
             </Head>
             <div>
                 <NavBar />
-                <MonthSelector />
                 <Movimentacoes
                     initialMonth={mes}
                     initialYear={ano}
