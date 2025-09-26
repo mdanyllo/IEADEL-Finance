@@ -1,13 +1,19 @@
 import { NextResponse } from "next/server";
 import { url } from "@/components/variavel";
+import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
 
     const res = await fetch(`${url}/movimentacoes`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        },
       body: JSON.stringify(body),
     });
 

@@ -1,1 +1,1 @@
-export const url = "https://iadel-api-rest.onrender.com"
+export const url = "http://localhost:8080";

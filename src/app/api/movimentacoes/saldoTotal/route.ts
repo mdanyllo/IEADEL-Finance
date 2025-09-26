@@ -1,11 +1,21 @@
 import { NextResponse } from "next/server";
 import { url } from "@/components/variavel";
+import { cookies } from "next/headers";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const idCongregacao = searchParams.get("idCongregacao");
+
   try {
-    const res = await fetch(`${url}/movimentacoes/totalGeral?idCongregacao=${idCongregacao}`);
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+    const res = await fetch(`${url}/movimentacoes/totalGeral?idCongregacao=${idCongregacao}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
     if (!res.ok) {
       return NextResponse.json(
