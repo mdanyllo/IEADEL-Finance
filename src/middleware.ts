@@ -1,17 +1,37 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { jwtDecode } from "jwt-decode";
 
-const protectedRoutes = ["/homeadmin", "/homeuser"];
+
+interface TokenPayload {
+  sub: string;
+  perfil: string;
+  exp: number;
+}
 
 export function middleware(req: NextRequest) {
-  const url = req.nextUrl.clone();
   const token = req.cookies.get("token")?.value;
 
-  if (protectedRoutes.some((path) => url.pathname.startsWith(path))) {
-    if (!token) {
-      url.pathname = "/";
-      return NextResponse.redirect(url);
+  if (token) {
+    try {
+      const payload = jwtDecode<TokenPayload>(token);
+
+      // Se for ADMIN, libera só /homeadmin
+      if (req.nextUrl.pathname.startsWith("/homeadmin") && payload.perfil !== "ADMIN") {
+        return NextResponse.redirect(new URL("/", req.url));
+      }
+
+      // Se for USER, libera só /homeuser
+      if (req.nextUrl.pathname.startsWith("/homeuser") && payload.perfil !== "USER") {
+        return NextResponse.redirect(new URL("/", req.url));
+      }
+
+    } catch (error) {
+      console.error("Token inválido:", error);
+      return NextResponse.redirect(new URL("/", req.url));
     }
+  } else {
+    return NextResponse.redirect(new URL("/", req.url));
   }
 
   return NextResponse.next();

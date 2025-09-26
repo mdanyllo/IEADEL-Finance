@@ -42,7 +42,6 @@ export default function Movimentacoes({
                 const mesFormatado = String(mes).padStart(2, "0");
 				const res = await fetch(`/api/movimentacoes/dizimos/porCongregacao?tipo=DIZIMO&mes=${mesFormatado}&ano=${ano}&idCongregacao=${idCongregacao}`);
 				const data = await res.json();
-                console.log(data)
 				setDizimos(data);
 				
 			} catch (err) {

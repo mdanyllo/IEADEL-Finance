@@ -1,6 +1,7 @@
 // src/app/api/movimentacoes/dizimos/porCongregacao/route.ts
 import { NextResponse } from "next/server";
 import { url } from "@/components/variavel";
+import { cookies } from "next/headers";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -14,7 +15,16 @@ export async function GET(req: Request) {
   const apiUrl = `${url}/movimentacoes?tipo=${tipo}&mes=${mes}&ano=${ano}&idCongregacao=${idCongregacao}`;
 
   try {
-    const res = await fetch(apiUrl, { cache: "no-store" });
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+    const res = await fetch(apiUrl,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     if (!res.ok) {
       return NextResponse.json({ error: "Erro no backend" }, { status: res.status });

@@ -18,16 +18,17 @@ export default function Home() {
     const res = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, senha }),
+        body: JSON.stringify({ email, password: senha }),
+        credentials: "include",
     });
 
     if (res.ok) {
         const data = await res.json();
-        document.cookie = `token=${data.token}; path=/`;
-        localStorage.setItem("user", JSON.stringify(data));
-        if (data.perfil === "ADMIN") {
+        document.cookie = `token=${data.token}; path=/;`;
+        localStorage.setItem("user", JSON.stringify(data.usuario));
+        if (data.usuario.perfil === "ADMIN") {
             router.push("/homeadmin");
-        } else if (data.perfil === "USER") {
+        } else if (data.usuario.perfil === "USER") {
             router.push("/homeuser");
         }
     } else {
