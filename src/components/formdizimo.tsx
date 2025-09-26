@@ -16,7 +16,8 @@ export default function DizimoModal() {
     setDescricao(valorInput);
 
     if (valorInput.length > 1) {
-      const res = await fetch(`/api/usuario?query=${valorInput}`);
+      const idCongregacao = JSON.parse(localStorage.getItem("user") || "{}").congregacao.idCongregacao;
+      const res = await fetch(`/api/usuario?query=${valorInput}&idCongregacao=${idCongregacao}`);
       const data: Pessoa[] = await res.json();
       setSugestoes(data);
       console.log(data);
