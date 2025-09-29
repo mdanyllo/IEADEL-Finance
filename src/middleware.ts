@@ -21,8 +21,8 @@ export function middleware(req: NextRequest) {
         return NextResponse.redirect(new URL("/", req.url));
       }
 
-      // Se for USER, libera só /homeuser
-      if (req.nextUrl.pathname.startsWith("/homeuser") && payload.perfil !== "USER") {
+      // Se for USER ou ADMIN, libera só /homeuser
+      if (req.nextUrl.pathname.startsWith("/homeuser") && payload.perfil !== "USER" && payload.perfil !== "ADMIN") {
         return NextResponse.redirect(new URL("/", req.url));
       }
 

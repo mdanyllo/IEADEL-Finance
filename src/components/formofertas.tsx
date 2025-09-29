@@ -7,21 +7,31 @@ export default function OfertaModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [valor, setValor] = useState("");
   const [data, setData] = useState("");
+  const [descricao, setDescricao] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const payload = {
+      descricao: descricao || "",
       valor: Number(valor) || 0,
       data,
+      idCongregacao: JSON.parse(localStorage.getItem("user") || "{}").congregacao.idCongregacao,
+      tipo: "OFERTA",
+      usuarioId: null,
     };
 
     console.log("Oferta enviada:", payload);
 
-    // salvar no banco via fetch para API
+    await fetch("/api/movimentacoes/novo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+    });
 
     setValor("");
     setData("");
+    setDescricao("");
     setIsOpen(false);
   }
 
@@ -40,6 +50,14 @@ export default function OfertaModal() {
             <h2 className="text-xl font-bold mb-4">Nova oferta</h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
+                <textarea
+                value={descricao}
+                placeholder="Digite a descrição"
+                onChange={(e) => setDescricao(e.target.value)}
+                className="border p-2 w-full"
+                rows={2}
+              />
+
               <input
                 type="number"
                 value={valor}
