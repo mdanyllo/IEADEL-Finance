@@ -120,7 +120,7 @@ export default function HomeAdmin() {
                     </div>
                     <div className="flex flex-shrink-0 flex-row justify-center md:gap-30 gap-10 md:w-full min-w-90">
                         <section className="flex gap-4 bg-[#ff2200] md:py-8 py-5 px-2 w-40 rounded-sm md:w-1/3">
-                            <Link className="w-full flex justify-center items-center gap-2" href="/cadastro">
+                            <Link className="w-full flex justify-center items-center gap-2" href="/despesas">
                                 <div className="flex flex-col">
                                 <h1 className="text-xl md:text-3xl text-center text-white">Despesas</h1>
                                 <span className="text-[#961400] md:text-base text-center text-sm">{formatBRL(despesa)}</span>
@@ -136,7 +136,7 @@ export default function HomeAdmin() {
                             </Link>
                         </section>
                         <section className="flex bg-[#00cf40] py-5 px-2 w-40 rounded-sm md:w-1/3">
-                            <Link className="w-full flex justify-center items-center gap-4" href="">
+                            <Link className="w-full cursor-default flex justify-center items-center gap-4" href="">
                                 <div className="flex flex-col">
                                 <h1 className="text-xl md:text-3xl text-center text-white">Saldo</h1>
                                 <span className="text-[#007525] md:text-base text-sm">{formatBRL(saldo)}</span>

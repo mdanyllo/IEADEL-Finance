@@ -54,6 +54,7 @@ export default function Movimentacoes({
     const data = new Date(d.data);
     return data.getMonth() + 1 === mes && data.getFullYear() === ano;
     });
+
     return (
         <>
             <MonthSelector

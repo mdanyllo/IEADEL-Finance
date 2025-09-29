@@ -1,12 +1,11 @@
 "use client";
 import NavBar from "@/components/navbar"
-import FormDizimo from "@/components/formdizimo";
+import FormDizimo from "@/components/formdizimos";
 import Movimentacoes from "@/components/movimentacoesdizimos";
 import type { Dizimo } from "@/components/movimentacoesdizimos";
 import Head from "next/head";
 import { useEffect } from "react";
 import { useState } from "react";
-
 
 export default function Dizimos() {
     const [mes, setMes] = useState(new Date().getMonth() + 1);
@@ -51,7 +50,6 @@ export default function Dizimos() {
                         setMes(novoMes);
                         setAno(novoAno);
                     }}
-
                 />
                 <FormDizimo />
             </div>

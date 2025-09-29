@@ -58,11 +58,12 @@ export default function DizimoModal() {
     setIsOpen(false);
   }
 
+
   return (
     <div className="p-4 flex flex-col items-center">
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-green-600 text-white px-4 py-2 rounded cursor-pointer"
+        className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer"
       >
         Adicionar Dízimo
       </button>
