@@ -31,6 +31,7 @@ export default function OfertaModal() {
     setData("");
     setDescricao("");
     setIsOpen(false);
+    window.location.reload();
   }
 
   return (

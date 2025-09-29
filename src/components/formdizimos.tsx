@@ -56,6 +56,7 @@ export default function DizimoModal() {
     setData("");
     setSugestoes([]);
     setIsOpen(false);
+    window.location.reload();
   }
 
 

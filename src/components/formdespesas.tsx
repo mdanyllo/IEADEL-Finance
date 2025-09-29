@@ -7,16 +7,25 @@ export default function DespesaModal() {
   const [data, setData] = useState("");
   const [descricao, setDescricao] = useState("")
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const payload = {
+      descricao: descricao || "",
       valor: Number(valor) || 0,
       data,
-      descricao
+      idCongregacao: JSON.parse(localStorage.getItem("user") || "{}").congregacao.idCongregacao,
+      tipo: "DESPESA",
+      usuarioId: null,
     };
      
     console.log(payload)
+
+    await fetch("/api/movimentacoes/novo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+    });
 
     // salvar no banco via fetch para API
 
@@ -24,6 +33,7 @@ export default function DespesaModal() {
     setData("");
     setDescricao("");
     setIsOpen(false);
+    window.location.reload();
   }
 
   return (
