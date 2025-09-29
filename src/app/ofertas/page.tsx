@@ -1,14 +1,10 @@
+"use client"
 import NavBar from "@/components/navbar"
 import MonthSelector from "@/components/monthselector"
 import Movimentacoes, { Oferta } from "@/components/movimentacoesofertas"
 import FormOfertas from "@/components/formofertas"
 import { useState } from "react"
 import { useEffect } from "react"
-
-
-export const metadata = {
-  title: "Ofertas",
-};
 
 
 export default function Ofertas() {
