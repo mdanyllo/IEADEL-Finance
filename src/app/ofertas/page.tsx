@@ -39,7 +39,6 @@ export default function Ofertas() {
         <>
             <div>
                 <NavBar />
-                <MonthSelector />
                 <Movimentacoes 
                     initialMonth={mes}
                     initialYear={ano}

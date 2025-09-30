@@ -39,7 +39,6 @@ export default function Despesas() {
     return (
         <div>
             <NavBar />
-            <MouthSelector />
             <Movimentacoes 
                 initialMonth={new Date().getMonth() + 1}
                 initialYear={new Date().getFullYear()}
