@@ -159,6 +159,9 @@ export default function HomeAdmin() {
                             </Link>
                         </section>
                     </div>
+                    <Link href="/relatorio" className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer mb-10">
+                        Gerar relatório mensal
+                    </Link>
                 </div>
             </div>
         </>
