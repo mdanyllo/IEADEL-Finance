@@ -1,1 +1,1 @@
-export const url = "https://iadel-api-rest.onrender.com";
+export const url = "https://ieadel-api-rest-production.up.railway.app";
