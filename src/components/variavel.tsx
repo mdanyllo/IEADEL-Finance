@@ -1,1 +1,1 @@
-export const url = "https://ieadel-api-rest-production.up.railway.app";
+export const url = "http://3.17.110.166:8080";
